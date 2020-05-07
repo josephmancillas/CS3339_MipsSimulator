@@ -20,4 +20,5 @@ make
 To run the simulator executable
 
 // All input files which are mips executables are located in the input directory
+/n
 ./simulator ./input "mips executable file"
