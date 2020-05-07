@@ -33,3 +33,5 @@
 
 # Editor settings
 *.json
+*.vscode
+
