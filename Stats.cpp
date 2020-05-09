@@ -32,6 +32,9 @@ Stats::Stats() {
   }
 }
 
+/*
+  Advances the pipeline foward
+*/
 void Stats::clock() {
   cycles++;
   // advance all pipeline flip-flops
@@ -43,7 +46,10 @@ void Stats::clock() {
   resultReg[IF1] = -1;
   resultStage[IF1] = ID;
 }
-
+/*
+  Takes in the the register source for the pipeline and determines where the 
+  hazards are and how many times the pipeline will need to bubble
+*/
 
 void Stats::registerSrc(int r, PIPESTAGE stage) {
 
@@ -81,6 +87,7 @@ for (int currentReg = EXE1; currentReg  < WB; currentReg++){
     int availableIn = resultStage[currentReg] - currentReg;
     int neededIn = stage - ID;
 
+    // Calculation to determine how many bubbles will need to be added to make the next register available
     bubblesNeeded =  availableIn - neededIn;
 
     for (int j = 0; j < bubblesNeeded; j++){
@@ -91,17 +98,30 @@ for (int currentReg = EXE1; currentReg  < WB; currentReg++){
   }
 }
 
+/*
+  Determines where the result register is needed and 
+  where the result stage is within the pipeline
+*/
+
 void Stats::registerDest(int r, PIPESTAGE stage) {
   resultReg[ID] = r;
   resultStage[ID] = stage;  
 }
 
-void Stats::flush(int count) { //DO NOT TOUCH
+/*
+  Flushes the pipeline and clears hazards
+*/
+
+void Stats::flush(int count) { 
   for (int i = 0; i < count; i++){
     flushes++;
     clock();
   }
 }
+
+/*
+  Advances the pipeline and injects a noop into the pipeline
+*/
 
 void Stats::bubble() { //DO NOT TOUCH
   //Run flops forward of ID, inject -1 to EXE1
@@ -117,6 +137,10 @@ void Stats::bubble() { //DO NOT TOUCH
   resultReg[EXE1] = -1;
   resultStage[EXE1] = ID;
 }
+
+/*
+  Takes in a the a int perameter and determines how many times the pipeline will need to be stalled
+*/
 
 void Stats::stall(int timesToStall){
   stalls += timesToStall;

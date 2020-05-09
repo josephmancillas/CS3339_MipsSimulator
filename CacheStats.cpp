@@ -25,7 +25,13 @@ CacheStats::CacheStats() {
     cout << "Write = " << WRITE_LATENCY << " cycles" << endl;
   }
 
-  // TODO: your code here */
+  /*
+    Initalizes the cache and sets the dirty and valid arrays as false which when 
+    running the cache the first time will be a compulsory miss since the cache will 
+    be accessed for the first time
+  */
+
+  
   for (way_count = 0; way_count < WAYS; way_count++) {
     for (set_count = 0; set_count < SETS; set_count++) {
       tags[way_count][set_count] = 0;
@@ -37,13 +43,22 @@ CacheStats::CacheStats() {
 
 }
 
+/*
+  Takes unsigned 32 bit integer, and a Store or Load type to determine 
+  which way the cache will be accessed. Using the logic from page 405 
+  from the Computer Organization and Design textbook by David Patterson and John Hennessy
+  we implemented a mod based cache.
+
+  See additional documentation folder
+*/
+
 int CacheStats::access(uint32_t addr, ACCESS_TYPE type) {
 
   index = (addr >> 5) & 0x07;
   tag = (addr >> 8);
 
-    LRU_bit[index] = getNextVal();
-    r = LRU_bit[index];
+  LRU_bit[index] = getNextVal();
+  r = LRU_bit[index];
 
 
   if (!CACHE_EN)
@@ -100,9 +115,18 @@ int CacheStats::access(uint32_t addr, ACCESS_TYPE type) {
   return LOOKUP_LATENCY;
 }
 
+/*
+  Takes the current index passed in by the current address and and adds plus one and 
+  mods by 4 to give us our Least Recently Used bit for our 4 way set associative cache
+*/ 
+
 int CacheStats::getNextVal() {
   return (LRU_bit[index] + 1) % 4;
 }
+
+/*
+  Prints accessess of cache and collects final writeback counts.
+*/
 
 void CacheStats::printFinalStats() {
   
