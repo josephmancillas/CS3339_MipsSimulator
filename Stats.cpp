@@ -127,7 +127,7 @@ void Stats::bubble() { //DO NOT TOUCH
   //Run flops forward of ID, inject -1 to EXE1
   bubbles++;
   cycles++;
-  //clock();
+  
 
   for (int i = WB; i > ID; i--) {
     resultReg[i] = resultReg[i - 1];

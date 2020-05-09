@@ -49,7 +49,7 @@ CacheStats::CacheStats() {
   from the Computer Organization and Design textbook by David Patterson and John Hennessy
   we implemented a mod based cache.
 
-  See additional documentation folder
+  See read me for logic
 */
 
 int CacheStats::access(uint32_t addr, ACCESS_TYPE type) {
