@@ -1,5 +1,7 @@
 # CS3339_TermProject
 
+# Mips Simulator
+
 Work done by Joseph Mancillas, Eduardo Reyes, Manuel Salinas
 
 Implementation of a 8 stage mips pipeline with forwarding and data caching implemented. This implementation is based off prior work done by Lee B. Hinkle which is based on earlier work by Martin Burtscher and Molly O'Neil. We would like to thank them for giving us a suitable starting point for this project. Using the provided baseline fles we were able to implement data cache and forwarding system to the mips architecture.
@@ -22,3 +24,8 @@ To run the simulator executable
 All input files which are mips executables are located in the input directory
 
 ./simulator ./input "mips executable file"
+
+# State machine diagram of cache implementation 
+![](https://github.com/josephmancillas/CS3339_TermProject/blob/master/images/cache%20state%20machine.png)
+
+Source: pg. 405 Computer Organization and Design by David Patterson and John Hennessy
