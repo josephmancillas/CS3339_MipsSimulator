@@ -16,10 +16,16 @@
 Stats stats;
 CacheStats cache;
 
+
 const string CPU::regNames[] = {"$zero","$at","$v0","$v1","$a0","$a1","$a2","$a3",
                                "$t0","$t1","$t2","$t3","$t4","$t5","$t6","$t7",
                                "$s0","$s1","$s2","$s3","$s4","$s5","$s6","$s7",
                                "$t8","$t9","$k0","$k1","$gp","$sp","$fp","$ra"};
+
+
+/*
+    Function CPU() by professor Lee B Hinkle
+*/
 
 CPU::CPU(uint32_t pc, Memory &iMem, Memory &dMem) : pc(pc), iMem(iMem), dMem(dMem) {
 
@@ -35,6 +41,10 @@ CPU::CPU(uint32_t pc, Memory &iMem, Memory &dMem) : pc(pc), iMem(iMem), dMem(dMe
    stop = false;
 }
 
+/*
+  Function run() by professor Lee B Hinkle.
+  Update to clock function with modified stats call by Joseph Mancillas.
+*/
 void CPU::run() {
 
    while(!stop) {
@@ -50,6 +60,10 @@ void CPU::run() {
    }
 }
 
+/*
+    Function fetch() by professor Lee B Hinkle
+*/
+
 void CPU::fetch() {
    instr = iMem.loadWord(pc);
    pc = pc + 4;
@@ -58,6 +72,8 @@ void CPU::fetch() {
 /////////////////////////////////////////
 // ALL YOUR CHANGES GO IN THIS FUNCTION
 /////////////////////////////////////////
+
+
 void CPU::decode() {
 
    uint32_t opcode;      // opcode field
@@ -250,10 +266,19 @@ void CPU::decode() {
    D(cout << endl);
 }
 
+/*
+    Function execute by professor Lee B Hinkle
+*/
+
 void CPU::execute()
 {
    aluOut = alu.op(aluOp, aluSrc1, aluSrc2);
 }
+
+/*
+    Function mem() by professor Lee B Hinkle
+    Calls to cache.access() by Joseph Mancillas
+*/
 
 void CPU::mem()
 {
@@ -271,6 +296,10 @@ void CPU::mem()
    }
 }
 
+/*
+  Function writeback() by professor Lee B Hinkle
+*/
+
 void CPU::writeback()
    {
        if (writeDest && destReg > 0) // skip when write is to zero register
@@ -282,6 +311,10 @@ void CPU::writeback()
            lo = alu.getLower();
        }
    }
+
+/*
+  Function PrintRegFile() by professor Lee B Hinkle
+*/
 
 void CPU::printRegFile()
 {

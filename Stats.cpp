@@ -37,6 +37,7 @@ Stats::Stats() {
 */
 void Stats::clock() {
   cycles++;
+
   // advance all pipeline flip-flops
   for(int i = WB; i > IF1; i--) {
     resultReg[i] = resultReg[i-1];

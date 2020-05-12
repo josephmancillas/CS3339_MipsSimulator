@@ -1,5 +1,9 @@
 #include "ALU.h"
 
+/*
+  Functions written here are written by professor Lee B Hinkle
+*/ 
+
 uint32_t ALU::op(ALU_OP op, uint32_t src1, uint32_t src2) {
   switch(op) {
     case ADD   : return (signed)src1 + (signed)src2;

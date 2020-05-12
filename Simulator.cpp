@@ -7,6 +7,10 @@
 #include <iostream>
 using namespace std;
 
+/*
+  Simulator.cpp by Lee B Hinkle
+*/
+
 const int MEMSIZE = 1 << 20; // 2^20
 
 int main(int argc, char *argv[]) {
